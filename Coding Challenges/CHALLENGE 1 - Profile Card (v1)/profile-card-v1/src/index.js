@@ -2,18 +2,47 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+const developers = [
+  {
+    id: 1,
+    name: "Nijaz Andelić",
+    desc: "Najjači React developer ikad",
+    devImage: "jonas.jpeg",
+  },
+  {
+    id: 2,
+    name: "Berin Fakić",
+    desc: "Najjači C# developer ikad",
+    devImage: "jonas.jpeg",
+  },
+  {
+    id: 3,
+    name: "Alen Bejtić",
+    desc: "Najjači C++ developer ikad",
+    devImage: "jonas.jpeg",
+  },
+];
+
 function App() {
-  return <DeveloperCard />;
+  return (
+    <>
+      {developers.map((dev) => (
+        <DeveloperCard
+          key={dev.id}
+          name={dev.name}
+          desc={dev.desc}
+          devImage={dev.devImage}
+        />
+      ))}
+    </>
+  );
 }
 
-function DeveloperCard() {
+function DeveloperCard(props) {
   return (
     <div className="developer-card">
-      <Avatar devImage="jonas.jpeg" />
-      <DeveloperData
-        name="Jonas Schmedtmann"
-        desc="Full-stack web developer and teacher at Udemy. When not coding or preparing a course, I like to play board games, to cook (and eat), or to just enjoy the Portuguese sun at the beach."
-      />
+      <Avatar devImage={props.devImage} />
+      <DeveloperData name={props.name} desc={props.desc} />
     </div>
   );
 }
@@ -47,7 +76,7 @@ function SkillsList() {
 
 function Skill(props) {
   return (
-    <div class="skill" style={{ backgroundColor: props.color }}>
+    <div className="skill" style={{ backgroundColor: props.color }}>
       {props.skill}
     </div>
   );
