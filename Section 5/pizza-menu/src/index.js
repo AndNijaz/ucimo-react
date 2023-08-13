@@ -72,10 +72,11 @@ function Header() {
 }
 
 function Footer() {
+  const date = new Date().getHours();
+  const isOpen = date > 8 && date < 17 ? true : false;
+
   return (
-    <footer className="footer">
-      {new Date().toLocaleDateString()} We're currently open!
-    </footer>
+    <footer className="footer">{isOpen && "We're currently open!"}</footer>
   );
 }
 
