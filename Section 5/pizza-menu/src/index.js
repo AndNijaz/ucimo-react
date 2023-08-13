@@ -76,19 +76,32 @@ function Footer() {
   const isOpen = date > 8 && date < 17 ? true : false;
 
   return (
-    <footer className="footer">{isOpen && "We're currently open!"}</footer>
+    <footer className="footer">
+      {isOpen && (
+        <div className="order">
+          <p>We're currently open!</p>
+          <button className="btn">Order now</button>
+        </div>
+      )}
+    </footer>
   );
 }
 
 function Menu() {
+  // const pizzas = pizzaData;
+  const pizzas = [];
+  const pizzasL = !!pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} />
-        ))}
-      </ul>
+      {pizzasL && (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }
