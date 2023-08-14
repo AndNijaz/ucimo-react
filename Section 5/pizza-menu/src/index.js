@@ -77,36 +77,42 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>We're currently open!</p>
           <button className="btn">Order now</button>
         </div>
+      ) : (
+        <p>We're currently closed! Please comee back later :)</p>
       )}
     </footer>
   );
 }
 
 function Menu() {
-  // const pizzas = pizzaData;
-  const pizzas = [];
+  const pizzas = pizzaData;
+  // const pizzas = [];
   const pizzasL = !!pizzas.length;
 
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {pizzasL && (
+      {pizzasL ? (
         <ul className="pizzas">
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>We're currently working on our menu! Please come back later.</p>
       )}
     </main>
   );
 }
 
 function Pizza(props) {
+  if (props.pizzaObj.soldOut) return null;
+
   return (
     <li className="pizza">
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
