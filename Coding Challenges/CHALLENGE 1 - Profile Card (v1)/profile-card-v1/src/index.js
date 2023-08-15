@@ -9,17 +9,50 @@ const developers = [
     desc: "Najjači React developer ikad",
     devImage: "jonas.jpeg",
   },
+  // {
+  //   id: 2,
+  //   name: "Berin Fakić",
+  //   desc: "Najjači C# developer ikad",
+  //   devImage: "jonas.jpeg",
+  // },
+  // {
+  //   id: 3,
+  //   name: "Alen Bejtić",
+  //   desc: "Najjači C++ developer ikad",
+  //   devImage: "jonas.jpeg",
+  // },
+];
+
+const skills = [
   {
-    id: 2,
-    name: "Berin Fakić",
-    desc: "Najjači C# developer ikad",
-    devImage: "jonas.jpeg",
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA",
   },
   {
-    id: 3,
-    name: "Alen Bejtić",
-    desc: "Najjači C++ developer ikad",
-    devImage: "jonas.jpeg",
+    skill: "JavaScript",
+    level: "advanced",
+    color: "#EFD81D",
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF",
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33",
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB",
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00",
   },
 ];
 
@@ -27,37 +60,30 @@ function App() {
   return (
     <>
       {developers.map((dev) => (
-        <DeveloperCard
-          key={dev.id}
-          name={dev.name}
-          desc={dev.desc}
-          devImage={dev.devImage}
-        />
+        <DeveloperCard devObj={dev} />
       ))}
     </>
   );
 }
 
-function DeveloperCard(props) {
+function DeveloperCard({ devObj }) {
   return (
     <div className="developer-card">
-      <Avatar devImage={props.devImage} />
-      <DeveloperData name={props.name} desc={props.desc} />
+      <Avatar devImage={devObj.devImage} />
+      <DeveloperData name={devObj.name} desc={devObj.desc} />
     </div>
   );
 }
 
-function Avatar(props) {
-  return (
-    <img src={props.devImage} alt="Developer" className="developer-avatar" />
-  );
+function Avatar({ devImage }) {
+  return <img src={devImage} alt="Developer" className="developer-avatar" />;
 }
 
-function DeveloperData(props) {
+function DeveloperData({ name, desc }) {
   return (
     <div className="developer-data">
-      <h2>{props.name}</h2>
-      <p>{props.desc}</p>
+      <h2>{name}</h2>
+      <p>{desc}</p>
       <SkillsList />
     </div>
   );
@@ -66,18 +92,22 @@ function DeveloperData(props) {
 function SkillsList() {
   return (
     <div className="skill-list">
-      <Skill skill="React 💪" color="blue" />
-      <Skill skill="HTML + CSS 💪" color="orange" />
-      <Skill skill="JavaScript 💪" color="yellow" />
-      <Skill skill="Svelte 💪" color="orangered" />
+      {skills.map((skill) => (
+        <Skill color={skill.color} skill={skill.skill} level={skill.level} />
+      ))}
     </div>
   );
 }
 
-function Skill(props) {
+function Skill({ color, skill, level }) {
   return (
-    <div className="skill" style={{ backgroundColor: props.color }}>
-      {props.skill}
+    <div className="skill" style={{ backgroundColor: color }}>
+      {skill}{" "}
+      <span>
+        {level === "beginner" ? "👶" : null}
+        {level === "advanced" ? "💪" : null}
+        {level === "intermediate" ? "👍" : null}
+      </span>
     </div>
   );
 }
