@@ -20,24 +20,9 @@ const months = [
   "Dec",
 ];
 
-function formatDate(date) {
-  const newDate = new Date(date);
-
-  return `
-  ${weekDays[newDate.getDay()]} 
-  ${months[newDate.getMonth()]} 
-  ${newDate.getDate()} 
-  ${newDate.getFullYear()}
-  `;
-}
-
 function calcDate(count) {
   const date = new Date();
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate() + count
-  ).toISOString();
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + count);
 }
 
 function App() {
@@ -75,8 +60,12 @@ function App() {
       </div>
       <p>
         {count === 0
-          ? `Today is ${formatDate(new Date().toISOString())}`
-          : `${count} days from today is ${formatDate(calcDate(count))}`}
+          ? `Today is ${new Date().toDateString()}`
+          : count > 0
+          ? `${count} days from today is `
+          : `${Math.abs(count)} days ago was `}
+
+        <span>{calcDate(count).toDateString()}</span>
       </p>
     </div>
   );
