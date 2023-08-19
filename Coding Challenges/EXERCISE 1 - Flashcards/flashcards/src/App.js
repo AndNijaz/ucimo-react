@@ -47,6 +47,10 @@ function FlashCards() {
   const [selectedID, setSelectedId] = useState(null);
 
   function handleFlip(id) {
+    if (id === selectedID) {
+      setSelectedId(null);
+      return;
+    }
     setSelectedId(id);
   }
 
@@ -54,6 +58,7 @@ function FlashCards() {
     <div className="flashcards">
       {questions.map((q) => (
         <div
+          key={q.id}
           className={selectedID === q.id ? "selected" : ""}
           onClick={() => handleFlip(q.id)}
         >
