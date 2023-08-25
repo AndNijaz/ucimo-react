@@ -51,7 +51,7 @@ function AddFriend({ onSetFriends }) {
 
   function submitHandler(e) {
     e.preventDefault();
-    onSetFriends({ id: 999, name: friendName, imgUrl: friendImg });
+    onSetFriends({ id: 999, name: friendName, debt: 0, imgUrl: friendImg });
   }
 
   return (

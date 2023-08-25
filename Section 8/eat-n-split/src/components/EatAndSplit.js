@@ -48,7 +48,7 @@ export default function EatAndSplit() {
       <SideBar
         friends={friends}
         onSelectFriend={handleSelectedFriends}
-        onSetFriends={handleSelectedFriends}
+        onSetFriends={handleSetFriends}
       />
       {selectedFriend && <Bill friend={selectedFriend} />}
     </div>
