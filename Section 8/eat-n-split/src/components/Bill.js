@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Bill({ friend, onUpdateFriends }) {
+export default function Bill({ friend, onUpdateFriends, setSelectedFriend }) {
   const [billValue, setBillValue] = useState("");
   const [userExpense, setUserExpense] = useState("");
   const [whoPays, setWhoPays] = useState("user");
@@ -13,12 +13,15 @@ export default function Bill({ friend, onUpdateFriends }) {
     const debt =
       whoPays === "user"
         ? friend.debt - friendExpense
-        : friend.debt + friendExpense;
+        : friend.debt + userExpense;
+
+    console.log(debt);
 
     const updatedFriend = { ...friend, debt: debt };
     onUpdateFriends(updatedFriend);
 
     resetForm();
+    setSelectedFriend(null);
   }
 
   function resetForm() {
@@ -53,13 +56,12 @@ export default function Bill({ friend, onUpdateFriends }) {
       <label htmlFor="who-pays">🤑 Who is paying the bill</label>
       <select
         id="who-pays"
-        value={whoPays}
         onChange={(e) => {
           setWhoPays(e.target.value);
         }}
       >
-        <option>You</option>
-        <option>{friend.name}</option>
+        <option value="user">You</option>
+        <option value="friend">{friend.name}</option>
       </select>
       <button className="button">Split bill</button>
     </form>

@@ -2,7 +2,12 @@ import { useState } from "react";
 import Friend from "./Friend";
 import AddFriend from "./AddFriend";
 
-export default function SideBar({ friends, onSelectFriend, onSetFriends }) {
+export default function SideBar({
+  friends,
+  onSelectFriend,
+  onSetFriends,
+  selectedFriend,
+}) {
   const [formOpen, setFormOpen] = useState(false);
 
   return (
@@ -13,6 +18,7 @@ export default function SideBar({ friends, onSelectFriend, onSetFriends }) {
             friend={friend}
             onSelectFriend={onSelectFriend}
             key={friend.id}
+            onSetFormOpen={(condition) => setFormOpen(condition)}
           />
         ))}
       </ul>
@@ -22,7 +28,13 @@ export default function SideBar({ friends, onSelectFriend, onSetFriends }) {
           onSetFormOpen={(condition) => setFormOpen(condition)}
         />
       )}
-      <button className="button" onClick={() => setFormOpen((fO) => !fO)}>
+      <button
+        className="button"
+        onClick={() => {
+          setFormOpen((fO) => !fO);
+          onSelectFriend(null);
+        }}
+      >
         {formOpen ? "Close" : "Add friend"}
       </button>
     </div>

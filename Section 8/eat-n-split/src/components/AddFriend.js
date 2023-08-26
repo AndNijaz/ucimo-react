@@ -8,6 +8,9 @@ export default function AddFriend({ onSetFriends, onSetFormOpen }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!friendName || !friendImg) return;
+
     onSetFriends({ id: 999, name: friendName, debt: 0, imgUrl: friendImg });
     setFriendName("");
     onSetFormOpen(false);

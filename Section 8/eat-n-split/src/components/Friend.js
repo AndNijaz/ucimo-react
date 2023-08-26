@@ -1,4 +1,4 @@
-export default function Friend({ friend, onSelectFriend }) {
+export default function Friend({ friend, onSelectFriend, onSetFormOpen }) {
   return (
     <li>
       <img src={friend.imgUrl} alt="human" />
@@ -17,7 +17,13 @@ export default function Friend({ friend, onSelectFriend }) {
           </p>
         )}
       </div>
-      <button className="button" onClick={() => onSelectFriend(friend)}>
+      <button
+        className="button"
+        onClick={() => {
+          onSelectFriend(friend);
+          onSetFormOpen(false);
+        }}
+      >
         Select
       </button>
     </li>

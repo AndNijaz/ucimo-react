@@ -55,9 +55,14 @@ export default function EatAndSplit() {
         friends={friends}
         onSelectFriend={handleSelectedFriends}
         onSetFriends={handleSetFriends}
+        selectedFriend={selectedFriend}
       />
       {selectedFriend && (
-        <Bill friend={selectedFriend} onUpdateFriends={updateFriends} />
+        <Bill
+          friend={selectedFriend}
+          onUpdateFriends={updateFriends}
+          onSetSelectedFriend={setSelectedFriend}
+        />
       )}
     </div>
   );
