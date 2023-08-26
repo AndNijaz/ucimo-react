@@ -36,11 +36,17 @@ export default function EatAndSplit() {
       ...friends,
       {
         ...friend,
-        id: friends.length,
+        id: friends.length + 1,
         imgUrl: `https://i.pravatar.cc/${friends.length * 100}`,
       },
     ];
     setFriends(friendsArr);
+  }
+
+  function updateFriends(friend) {
+    const friendsArr = friends.map((f) => (f.id !== friend.id ? f : friend));
+    setFriends(friendsArr);
+    setSelectedFriend(friend);
   }
 
   return (
@@ -50,7 +56,9 @@ export default function EatAndSplit() {
         onSelectFriend={handleSelectedFriends}
         onSetFriends={handleSetFriends}
       />
-      {selectedFriend && <Bill friend={selectedFriend} />}
+      {selectedFriend && (
+        <Bill friend={selectedFriend} onUpdateFriends={updateFriends} />
+      )}
     </div>
   );
 }
