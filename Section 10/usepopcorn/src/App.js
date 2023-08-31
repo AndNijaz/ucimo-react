@@ -125,17 +125,6 @@ function NumResults({ movies }) {
   );
 }
 
-function MovieListBox({ children }) {
-  const [isOpen1, setIsOpen1] = useState(true);
-
-  return (
-    <div className="box">
-      <BtnToggle onClickHandler={setIsOpen1}>{isOpen1 ? "-" : "+"}</BtnToggle>
-      {isOpen1 && children}
-    </div>
-  );
-}
-
 function MovieList({ movies }) {
   return (
     <ul className="list">
@@ -143,23 +132,6 @@ function MovieList({ movies }) {
         <Movie movie={movie} key={movie.imdbID} />
       ))}
     </ul>
-  );
-}
-
-function WachedMoviesListBox({ children }) {
-  const [isOpen2, setIsOpen2] = useState(true);
-
-  return (
-    <div className="box">
-      <BtnToggle onClickHandler={setIsOpen2}>{isOpen2 ? "–" : "+"}</BtnToggle>
-      {isOpen2 &&
-        children(
-          <>
-            <Summary watched={watched} />
-            <WatchedMovieList watched={watched} />
-          </>
-        )}
-    </div>
   );
 }
 
