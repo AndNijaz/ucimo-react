@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Bill({ friend, onUpdateFriends, setSelectedFriend }) {
+export default function Bill({ friend, onUpdateFriends, onSetSelectedFriend }) {
   const [billValue, setBillValue] = useState("");
   const [userExpense, setUserExpense] = useState("");
   const [whoPays, setWhoPays] = useState("user");
@@ -21,7 +21,7 @@ export default function Bill({ friend, onUpdateFriends, setSelectedFriend }) {
     onUpdateFriends(updatedFriend);
 
     resetForm();
-    setSelectedFriend(null);
+    onSetSelectedFriend(null);
   }
 
   function resetForm() {

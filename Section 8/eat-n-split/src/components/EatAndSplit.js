@@ -59,6 +59,7 @@ export default function EatAndSplit() {
       />
       {selectedFriend && (
         <Bill
+          key={selectedFriend.id}
           friend={selectedFriend}
           onUpdateFriends={updateFriends}
           onSetSelectedFriend={setSelectedFriend}
