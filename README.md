@@ -3,3 +3,5 @@ This is a repository that serves to track my learning and improvement in React. 
 
 The material and all projects are from the React Udemy course by Jonas Schmedtmann:
 https://www.udemy.com/course/the-ultimate-react-course/
+
+P.S. I really love React and thoroughly enjoy working with it. For that reason, I have a strong desire to learn it in-depth.
