@@ -109,24 +109,6 @@ function Search({ query, setQuery }) {
     inputRef.current.focus();
   }, []);
 
-  // useEffect(
-  //   function () {
-  //     function callback(e) {
-  //       if (e.code === "Enter") {
-  //         if (document.activeElement === inputRef.current) return;
-
-  //         inputRef.current.focus();
-  //         setQuery("");
-  //       }
-  //     }
-
-  //     document.addEventListener("keydown", callback);
-
-  //     return () => document.removeEventListener("keydown", callback);
-  //   },
-  //   [setQuery]
-  // );
-
   useKeyDown("Enter", function () {
     if (document.activeElement === inputRef.current) return;
 
