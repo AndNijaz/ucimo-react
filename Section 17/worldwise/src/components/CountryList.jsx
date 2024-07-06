@@ -4,21 +4,21 @@ import CountryItem from "./CountryItem";
 import Spinner from "./Spinner";
 import Message from "./Message";
 
-function CountriesList({ cities, isLoading }) {
+function CountryList({ cities, isLoading }) {
   if (isLoading) return <Spinner />;
 
-  if (!cities.length)
+  if (!cities || !cities.length)
     return (
       <Message message="Add your first city by clicking a city on the map" />
     );
 
-  const countries = [];
-
-  cities.forEach((city) => {
-    if (!countries.some((c) => c.country === city.country)) {
-      countries.push({ country: city.country, emoji: city.emoji });
+  const countries = cities.reduce((arr, city) => {
+    if (!arr.map((el) => el.country).includes(city.country)) {
+      return [...arr, { country: city.country, emoji: city.emoji }];
+    } else {
+      return arr;
     }
-  });
+  }, []);
 
   return (
     <ul className={styles.countryList}>
@@ -29,4 +29,4 @@ function CountriesList({ cities, isLoading }) {
   );
 }
 
-export default CountriesList;
+export default CountryList;
