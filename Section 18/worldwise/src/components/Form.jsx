@@ -5,6 +5,7 @@ import { useState } from "react";
 import styles from "./Form.module.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import { useCities } from "../contexts/CitiesContext";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
@@ -23,6 +24,8 @@ function Form() {
   console.log(country, setCountry);
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+
+  const { addCity } = useCities();
 
   return (
     <form className={styles.form}>
@@ -55,8 +58,25 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        {/* <button>Add</button> */}
-        <Button type="primary">Add</Button>
+        <Button
+          type="primary"
+          onClick={(e) => {
+            e.preventDefault();
+            console.log("aaa");
+            addCity({
+              cityName,
+              country,
+              date,
+              notes,
+              position: { lat: 1, lng: 2 },
+              emoji: "♥️",
+              id: Math.floor(Math.random() * 100000),
+            });
+            navigate(-1);
+          }}
+        >
+          Add
+        </Button>
         <button
           type="back"
           onClick={(e) => {

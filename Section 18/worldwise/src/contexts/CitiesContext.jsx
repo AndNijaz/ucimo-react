@@ -24,8 +24,15 @@ function CitiesProvider({ children }) {
     getData();
   }, []);
 
+  // { cityName, country, date, notes }
+  function addCity(city) {
+    setCities(() => [...cities, city]);
+  }
+
   return (
-    <CitesContext.Provider value={{ cities: cities, isLoading: isLoading }}>
+    <CitesContext.Provider
+      value={{ cities: cities, isLoading: isLoading, addCity: addCity }}
+    >
       {children}
     </CitesContext.Provider>
   );
