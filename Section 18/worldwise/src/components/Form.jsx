@@ -4,8 +4,9 @@ import { useState } from "react";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCities } from "../contexts/CitiesContext";
+import ButtonBack from "./ButtonBack";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
@@ -18,10 +19,15 @@ export function convertToEmoji(countryCode) {
 
 function Form() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
+
+  console.log(lat, lng);
 
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
-  console.log(country, setCountry);
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
 
@@ -62,13 +68,12 @@ function Form() {
           type="primary"
           onClick={(e) => {
             e.preventDefault();
-            console.log("aaa");
             addCity({
               cityName,
               country,
               date,
               notes,
-              position: { lat: 1, lng: 2 },
+              position: { lat, lng },
               emoji: "♥️",
               id: Math.floor(Math.random() * 100000),
             });
@@ -77,15 +82,7 @@ function Form() {
         >
           Add
         </Button>
-        <button
-          type="back"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-          }}
-        >
-          &larr; Back
-        </button>
+        <ButtonBack />
       </div>
     </form>
   );
