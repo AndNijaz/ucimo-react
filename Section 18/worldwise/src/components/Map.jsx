@@ -15,6 +15,8 @@ import Button from "./Button";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
+  const { addCity, isLoading } = useCities();
+
   const [mapPosition, setPosition] = useState([43.7, 18.5]);
   const { cities, currentCity } = useCities();
   const { mapLat, mapLng } = useUrlPosition();
@@ -42,7 +44,7 @@ function Map() {
   );
 
   return (
-    <div className={styles.mapContainer}>
+    <div className={`${styles.mapContainer} ${isLoading ? "loading" : ""}`}>
       <Button type="position" onClick={() => getGeolocationPosition()}>
         {isGeolocationLoading ? "Loading..." : "USE YOUR POSITION"}{" "}
       </Button>

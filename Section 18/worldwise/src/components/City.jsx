@@ -18,9 +18,6 @@ function City() {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
-
   useEffect(() => {
     getCity(id);
   }, [id]);

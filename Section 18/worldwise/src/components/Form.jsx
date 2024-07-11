@@ -11,6 +11,8 @@ import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import Message from "./Message";
 import Spinner from "./Spinner";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -33,11 +35,12 @@ function Form() {
   const [emoji, setEmoji] = useState("");
   const [geocodingError, setGeocodingError] = useState(false);
 
-  const { addCity } = useCities();
+  const { addCity, isLoading } = useCities();
 
   useEffect(
     function () {
       async function getCityData() {
+        if (!mapLat && !mapLng) return;
         try {
           setIsLoadingGeocoding(true);
           setGeocodingError(false);
@@ -64,11 +67,33 @@ function Form() {
     [mapLat, mapLng]
   );
 
+  async function onSubmitHandler(e) {
+    e.preventDefault();
+
+    if (!cityName || !date) return;
+
+    await addCity({
+      cityName,
+      country,
+      date,
+      notes,
+      position: { lat: mapLat, lng: mapLng },
+      emoji,
+    });
+
+    navigate("/app/cities");
+  }
+
   if (geocodingError) return <Message message={geocodingError} />;
+  if (geocodingError)
+    return <Message message="Please start by clicking on the map!" />;
   if (isLoadingGeocoding) return <Spinner />;
 
   return (
-    <form className={styles.form}>
+    <form
+      className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+      onSubmit={onSubmitHandler}
+    >
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -81,10 +106,15 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        {/* <input
           id="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
+        /> */}
+        <DatePicker
+          selected={date}
+          onChange={(date) => setDate(date)}
+          dateFormat="dd/MM/yyyy"
         />
       </div>
 
@@ -98,24 +128,7 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <Button
-          type="primary"
-          onClick={(e) => {
-            e.preventDefault();
-            addCity({
-              cityName,
-              country,
-              date,
-              notes,
-              position: { mapLat, mapLng },
-              emoji: "♥️",
-              id: Math.floor(Math.random() * 100000),
-            });
-            navigate(-1);
-          }}
-        >
-          Add
-        </Button>
+        <Button type="primary">Add</Button>
         <ButtonBack />
       </div>
     </form>
