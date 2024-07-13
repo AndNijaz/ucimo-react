@@ -35,6 +35,18 @@
         "lng": "18.580440275109513"
       },
       "emoji": "BA"
+    },
+    {
+      "id": "ac8d",
+      "cityName": "Konjic",
+      "country": "Bosnia and Herzegovina",
+      "date": "2024-07-13T09:09:03.582Z",
+      "notes": "",
+      "position": {
+        "lat": "43.64925082537281",
+        "lng": "17.977657383098624"
+      },
+      "emoji": "BA"
     }
   ]
 }
