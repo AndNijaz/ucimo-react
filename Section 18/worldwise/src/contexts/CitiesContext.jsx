@@ -1,4 +1,10 @@
-import { useContext, useState, useEffect, useReducer } from "react";
+import {
+  useContext,
+  useState,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 import { createContext } from "react";
 const URL = "http://localhost:9000";
 
@@ -106,7 +112,7 @@ function CitiesProvider({ children }) {
     }
   }
 
-  async function getCity(id) {
+  const getCity = useCallback(async function getCity(id) {
     dispatch({ type: "loading" });
 
     try {
@@ -119,7 +125,7 @@ function CitiesProvider({ children }) {
         payload: "Error while setting the current city.",
       });
     }
-  }
+  }, []);
 
   return (
     <CitiesContext.Provider
