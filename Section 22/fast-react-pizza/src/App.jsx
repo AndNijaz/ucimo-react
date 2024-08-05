@@ -7,6 +7,7 @@ import Order from "./features/order/Order";
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/Order";
 import { loader as menuLoader } from "./features/menu/Menu";
+import { loader as orderLoader } from "./features/order/Order";
 import Error from "./ui/Error";
 
 const router = createBrowserRouter([
@@ -23,7 +24,12 @@ const router = createBrowserRouter([
       },
       { element: <Cart />, path: "/Cart" },
       { element: <CreateOrder />, path: "/oreder/new" },
-      { element: <Order />, path: "/oreder/:orderID" },
+      {
+        path: "/order/:orderID",
+        element: <Order />,
+        loader: orderLoader,
+        errorElement: <Error />,
+      },
     ],
   },
 ]);
