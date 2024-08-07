@@ -5,10 +5,11 @@ import Menu from "./features/menu/Menu";
 import Home from "./ui/Home";
 import Order from "./features/order/Order";
 import Cart from "./features/cart/Cart";
-import CreateOrder from "./features/order/Order";
+import CreateOrder from "./features/order/CreateOrder";
 import { loader as menuLoader } from "./features/menu/Menu";
 import { loader as orderLoader } from "./features/order/Order";
 import Error from "./ui/Error";
+import { action as createOrderAction } from "./features/order/CreateOrder";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
         errorElement: <Error />,
       },
       { element: <Cart />, path: "/Cart" },
-      { element: <CreateOrder />, path: "/oreder/new" },
+      {
+        element: <CreateOrder />,
+        path: "/order/new",
+        action: createOrderAction,
+      },
       {
         path: "/order/:orderID",
         element: <Order />,
