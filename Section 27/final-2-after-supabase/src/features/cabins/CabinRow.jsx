@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { HiPencil, HiTrash, HiSquare2Stack } from "react-icons/hi2";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteCabins } from "../../services/apiCabins";
 // import { formatCurrency } from "../../utils/helpers";
 
 // import Menus from "ui/Menus";
@@ -77,6 +79,20 @@ function CabinRow({ cabin }) {
   //     description,
   //   });
   // }
+  const queryClient = useQueryClient();
+
+  const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: (id) => deleteCabins(id),
+    onSuccess: () => {
+      alert("Cabin deleted successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["cabins"],
+      });
+    },
+    onError: (err) => {
+      alert(err.message);
+    },
+  });
 
   return (
     <TableRow role="row">
@@ -85,7 +101,14 @@ function CabinRow({ cabin }) {
       <div>Fits up to {maxCapacity} guests</div>
       <p>100</p>
       <p>50</p>
-      <button>Delte</button>
+      <button
+        onClick={() => {
+          console.log(cabinId);
+          mutate(cabinId);
+        }}
+      >
+        Delte
+      </button>
       {/* <Price>{formatCurrency(regularPrice)}</Price> */}
     </TableRow>
   );
