@@ -86,7 +86,7 @@ function CabinTable() {
   // const filterValue = searchParams.get("discount") || "all";
 
   // // This is probably not the most efficient way, but that doesn't matter
-  // let filteredCabins;
+  // let filteredCabins;NPM
   // if (filterValue === "all") filteredCabins = cabins;
   // if (filterValue === "no-discount")
   //   filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
