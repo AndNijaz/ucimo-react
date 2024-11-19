@@ -104,7 +104,6 @@ function CabinRow({ cabin }) {
       <p>50</p>
       <button
         onClick={() => {
-          console.log(cabinId);
           mutate(cabinId);
         }}
       >

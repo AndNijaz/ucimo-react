@@ -52,8 +52,6 @@ function CreateCabinForm() {
   const errors = formState.errors;
   const queryClient = useQueryClient();
 
-  // console.log(getValues());
-
   const { mutate, isLoading } = useMutation({
     mutationFn: (newCabin) => createCabin(newCabin),
     onSuccess: () => {
@@ -71,15 +69,10 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    console.log(data);
-    mutate(data);
+    mutate({ ...data, image: data?.image[0] });
   }
 
-  function onError(errors) {
-    // console.log(errors);
-    // console.log(errors);
-  }
-  console.log(errors);
+  function onError(errors) {}
 
   return (
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -100,6 +93,7 @@ function CreateCabinForm() {
           id="maxCapacity"
           {...register("maxCapacity", { required: "This field is required" })}
         />
+        <Error>{errors?.maxCapacity?.message}</Error>
       </FormRow>
 
       <FormRow>
@@ -109,6 +103,7 @@ function CreateCabinForm() {
           id="regularPrice"
           {...register("regularPrice", { required: "This field is required" })}
         />
+        <Error>{errors?.regularPrice?.message}</Error>
       </FormRow>
 
       <FormRow>
@@ -125,6 +120,7 @@ function CreateCabinForm() {
               "Discound should be less than price.",
           })}
         />
+        <Error>{errors?.discount?.message}</Error>
       </FormRow>
 
       <FormRow>
@@ -135,11 +131,17 @@ function CreateCabinForm() {
           defaultValue=""
           {...register("description", { required: "This field is required" })}
         />
+        <Error>{errors?.description?.message}</Error>
       </FormRow>
 
       <FormRow>
         <Label htmlFor="image">Cabin photo</Label>
-        <FileInput id="image" accept="image/*" />
+        <FileInput
+          id="image"
+          accept="image/*"
+          {...register("image", { required: "This field is required" })}
+        />
+        <Error>{errors?.image?.message}</Error>
       </FormRow>
 
       <FormRow>
