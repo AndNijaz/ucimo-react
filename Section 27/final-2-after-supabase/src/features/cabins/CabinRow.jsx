@@ -5,6 +5,8 @@ import { deleteCabins } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import CreateCabinForm from "./CreateCabinForm";
 import { useState } from "react";
+import useDeleteCabin from "./useDeleteCabin";
+import useCreateCabin from "./useCreatecabin";
 // import { formatCurrency } from "../../utils/helpers";
 
 // import Menus from "ui/Menus";
@@ -84,20 +86,21 @@ function CabinRow({ cabin }) {
   // }
 
   const [showForm, setShowForm] = useState(false);
-  const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: (id) => deleteCabins(id),
-    onSuccess: () => {
-      toast.success("Cabin deleted successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
+  const { isDeleting, deleteCabin } = useDeleteCabin();
+
+  const { createCabin, isCreating } = useCreateCabin();
+  function duplicateCabin(id) {
+    // console.log(cabin);
+    createCabin({
+      name,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    });
+  }
 
   return (
     <>
@@ -108,10 +111,11 @@ function CabinRow({ cabin }) {
         <p>100</p>
         <p>50</p>
         <div>
+          <button onClick={() => duplicateCabin()}>Duplicate</button>
           <button onClick={() => setShowForm((show) => !show)}>Edit</button>
           <button
             onClick={() => {
-              mutate(cabinId);
+              deleteCabin(cabinId);
             }}
           >
             Delte

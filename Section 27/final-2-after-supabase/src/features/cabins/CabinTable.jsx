@@ -17,6 +17,7 @@ import { getSettings } from "../../services/apiSettings";
 import { StyledTable } from "../../ui/Table";
 import CabinRow from "./CabinRow";
 import Spinner from "../../ui/Spinner";
+import useCabins from "./useCabins";
 
 // v2
 // Right now this is not really reusable... But we will want to use a similar table for guests as well, but with different columns. ALSO, right now we are defining these columns in BOTH the TableHeader and the CabinRow, which is not good at all. Instead, it would be much better to simply pass the columns into the Table, and the table would give access to the columns to both the header and row. So how can we do that? Well we can again use a compound component! We don't HAVE to do it like this, there's a million ways to implement a table, also without CSS Grid, but this is what I chose
@@ -49,14 +50,9 @@ function CabinTable() {
   // It's EXTREMELY important to understand that this functionality is enabled by React Query, and can also be enabled by other data loading libraries or frameworks. But we as developers can NOT directly tell React "hey, this component should be suspended until some data is arriving", at least not yet. For example, React won't automatically detect when we're fetching data in a component in a useEffect or so. There will be something in the future, and then I will add it to the course, but not yet
 
   // Now, everything that's inside a Suspense will be treated as just one unit, so when just one component of the child components is currently suspended, all of them will be replaced with the fallback. We can nest multiple Suspense boundaries, and the closest one will be shown. This way, when we have a big Suspense on the top on the tree, it won't have to WAIT
-  const {
-    isLoading,
-    data: cabins,
-    error,
-  } = useQuery({
-    queryKey: ["cabins"],
-    queryFn: getCabins,
-  });
+  const { isLoading, error, cabins } = useCabins();
+  // const {isLoading, error, cabins} = use
+
   if (isLoading) return <Spinner />;
 
   return (
