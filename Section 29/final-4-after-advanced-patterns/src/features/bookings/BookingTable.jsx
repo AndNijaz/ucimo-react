@@ -1,6 +1,7 @@
 // import styled from 'styled-components';
 
 import Menus from "../../ui/Menus";
+import Pagination from "../../ui/Pagination";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import BookingRow from "./BookingRow";
@@ -63,7 +64,10 @@ function BookingTable() {
           )}
         />
 
-        <Table.Footer>{/* <Pagination count={count} /> */}</Table.Footer>
+        <Table.Footer>
+          <Pagination />
+          {/* <Pagination count={count} /> */}
+        </Table.Footer>
       </Table>
     </Menus>
   );
