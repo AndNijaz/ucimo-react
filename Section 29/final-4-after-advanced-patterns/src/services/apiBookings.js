@@ -1,3 +1,4 @@
+import { PAGE_SIZE } from "../utils/constants";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
@@ -16,7 +17,7 @@ export async function getBooking(id) {
   return data;
 }
 
-export async function getBookings({ filter, sortBy }) {
+export async function getBookings({ filter, sortBy, page }) {
   // const { field, searchFilter, method } = filter;
   // console.log(filter);
 
@@ -34,14 +35,18 @@ export async function getBookings({ filter, sortBy }) {
       ascending: sortBy.direction === "asc",
     });
 
-  let { data: bookings, error } = await query;
+  if (page) {
+    query = query.range((page - 1) * PAGE_SIZE, page * (PAGE_SIZE - 1));
+  }
+
+  let { data: bookings, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
   }
 
-  return bookings;
+  return { bookings, count };
 }
 
 // Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.

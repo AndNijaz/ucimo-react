@@ -33,7 +33,8 @@ function BookingTable() {
   const { bookings, count, isLoading } = useBookings();
 
   if (isLoading) return <Spinner />;
-  console.log(bookings);
+
+  // console.log(bookings);
   // if (!bookings) return <Empty resource={"bookings"} />;
 
   // VIDEO stupid JS bug, just an example of course
@@ -65,8 +66,8 @@ function BookingTable() {
         />
 
         <Table.Footer>
-          <Pagination />
-          {/* <Pagination count={count} /> */}
+          {/* <Pagination /> */}
+          <Pagination count={count} />
         </Table.Footer>
       </Table>
     </Menus>
