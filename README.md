@@ -1,6 +1,6 @@
 # Učimo: React Learning Documentation
 
-[Repository Link](https://github.com/AndNijaz/ucimo-react)
+[Google Docs](https://docs.google.com/document/d/1F39-cx5qGlBc9CyFxpE1Qtyr_9fPFEhyQpb97lLaTVU/edit?usp=sharing)
 
 ## Project Description
 Učimo is a React-based project created as part of Jonas Schmedtmann's "The Ultimate React Course." It serves as a learning tracker and documentation resource for React students. The platform combines hands-on coding practices with a structured script that can be used as a guide by students to reinforce their understanding of React concepts.
