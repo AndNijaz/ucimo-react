@@ -62,18 +62,6 @@ The project is intended for:
 
 ---
 
-## Screenshots
-
-### Dashboard View
-![Dashboard View](img/dashboard-view.png)
-
-### Component Example
-![Component Example](img/component-example.png)
-
-> *Screenshots are stored in the `/img` directory.*
-
----
-
 ## Project Status
 This project is **complete** as a learning and documentation tool. Future plans include:
 - Expanding examples to cover advanced React features.
@@ -89,8 +77,3 @@ This project is based on Jonas Schmedtmann's "The Ultimate React Course" on Udem
 
 ## Documentation
 For a detailed learning script and React concepts, refer to the [Google Doc](https://docs.google.com/document/d/1F39-cx5qGlBc9CyFxpE1Qtyr_9fPFEhyQpb97lLaTVU/edit?usp=sharing).
-
----
-
-## Live Demo
-Check out the live version here: [Učimo Platform](https://ucimo-react.netlify.app/)
