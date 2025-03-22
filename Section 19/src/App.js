@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Calculator from "./Calculator";
 import ToggleSounds from "./ToggleSounds";
+import { Container, AppBar, Grow, Grid, Typography } from "@material-ui/core";
+// import memories from "./images/memories.jpeg";
 
 function formatTime(date) {
   return new Intl.DateTimeFormat("en", {
@@ -11,7 +13,7 @@ function formatTime(date) {
     second: "2-digit",
   }).format(date);
 }
-
+/*
 function App() {
   const [allowSound, setAllowSound] = useState(true);
   const [time, setTime] = useState(formatTime(new Date()));
@@ -60,6 +62,18 @@ function App() {
       <ToggleSounds allowSound={allowSound} setAllowSound={setAllowSound} />
       <Calculator workouts={workouts} allowSound={allowSound} />
     </main>
+  );
+}
+*/
+
+function App() {
+  return (
+    <Container maxidth="lg">
+      <AppBar position="static" color="inherit">
+        <Typography variant="h2" align="center"></Typography>
+        <img src="" alt="memories" height={60} />
+      </AppBar>
+    </Container>
   );
 }
 

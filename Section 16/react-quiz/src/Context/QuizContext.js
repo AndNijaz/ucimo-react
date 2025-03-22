@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const QuizContext = createContext();
 
@@ -85,6 +85,22 @@ function QuizProvider({ children }) {
     { questions, status, index, answer, points, highscore, secondsRemaining },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch("http://localhost:9000/questions");
+        const data = await res.json();
+
+        if (!res.ok) dispatch({ type: "dataFailed" });
+
+        dispatch({ type: "dataRecieved", payload: data });
+      } catch (err) {
+        dispatch({ type: "dataFailed" });
+      }
+    }
+    fetchData();
+  }, [dispatch]);
 
   const numOfQuestions = questions.length;
   const maxPossiblePoints = questions.reduce(

@@ -1,0 +1,15 @@
+{
+  "extends": "react-app",
+  "react/prop-types": 0,
+  "react/forbid-prop-types": 0,
+  "no-unused-vars": [
+    "warn",
+    {
+      "vars": "all",
+      "args": "after-used",
+      "caughtErrors": "all",
+      "ignoreRestSiblings": false,
+      "reportUsedIgnorePattern": false
+    }
+  ]
+}

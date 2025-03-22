@@ -111,7 +111,24 @@ function BookingRow({
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
 
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+        <Menus.List id={bookingId}>
+          <Menus.Button
+            icon={<HiEye onClick={navigate(`/bookings/${bookingId}`)} />}
+          >
+            See Details
+          </Menus.Button>
+        </Menus.List>
+      </Menus.Menu>
+
       {/* VIDEO we could export this into own component... */}
+
+      {/*  
+      
+
+
+
       <Modal>
         <Menus.Menu>
           <Menus.Toggle id={bookingId} />
@@ -133,35 +150,23 @@ function BookingRow({
             )}
 
             {status === "checked-in" && (
-              <Menus.Button
-                // onClick={() => checkout(bookingId)}
-                // disabled={isCheckingOut}
-                icon={<HiArrowUpOnSquare />}
-              >
+              <Menus.Button icon={<HiArrowUpOnSquare />}>
                 Check out
               </Menus.Button>
             )}
 
             <Menus.Button icon={<HiPencil />}>Edit booking</Menus.Button>
-            {/* <Menus.Button>Delete</Menus.Button> */}
-
-            {/* Now it gets a bit confusing... */}
-            {/* <Modal.Toggle opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete booking</Menus.Button>
-            </Modal.Toggle> */}
           </Menus.List>
         </Menus.Menu>
 
-        {/* This needs to be OUTSIDE of the menu, which in no problem. The compound component gives us this flexibility */}
         <Modal.Window name="delete">
           <ConfirmDelete
             resource="booking"
-            // These options will be passed wherever the function gets called, and they determine what happens next
-            // onConfirm={(options) => deleteBooking(bookingId, options)}
-            // disabled={isDeleting}
+
           />
         </Modal.Window>
       </Modal>
+      */}
 
       {/* <div>
         <ButtonWithConfirm
